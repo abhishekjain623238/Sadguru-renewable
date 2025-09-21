@@ -1,173 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sadguru Renewable | Solar Energy Company</title>
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
   <style>
-    :root{--yellow:#f9b300;--green:#009245;--black:#1a1a1a;--white:#ffffff;--gray:#f5f5f5;}
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-    body{line-height:1.6;color:var(--black);background:linear-gradient(135deg,#e8ffe8,#fff8e1,#e0f7fa);}
-    nav{display:flex;justify-content:space-between;align-items:center;background:var(--black);padding:10px 20px;position:sticky;top:0;z-index:1000}
-    .logo-container{display:flex;align-items:center}
-    #site-logo{height:100px;margin-right:12px;border-radius:8px}
-    .brand{color:var(--white);font-size:1.2rem;font-weight:bold}
-    .links{display:flex;gap:15px}
-    .links a{color:var(--white);text-decoration:none;font-weight:bold}
-    section{padding:50px 20px;max-width:1200px;margin:auto}
-    h2{color:var(--green);margin-bottom:20px;text-align:center}
-    /* Projects */
-    .project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:20px}
-    .project-card{background:var(--white);border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.08);text-align:center;padding-bottom:15px}
-    .project-card img{width:100%;height:200px;object-fit:cover;display:block}
-    .project-card h3{margin:12px 0 6px;color:var(--green)}
-    .project-card p{padding:0 12px 12px;color:#444}
-    .project-card:hover{transform:translateY(-6px)}
-    /* Enquiry form */
-    form{display:flex;flex-direction:column;gap:12px;max-width:600px;margin:0 auto}
-    input,select,textarea{padding:12px;border-radius:8px;border:1px solid #ccc;font-size:1rem}
-    button{background:var(--green);color:var(--white);padding:12px;border:none;border-radius:8px;cursor:pointer}
-    button:hover{background:var(--yellow);color:var(--black)}
-    footer{background:var(--black);color:var(--white);text-align:center;padding:20px;margin-top:30px}
-    /* Loader */
-    #loader{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--white);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3000}
-    #sun{font-size:92px;animation:wave 1s infinite alternate}
-    @keyframes wave{from{transform:rotate(-10deg)}to{transform:rotate(10deg)}}
-    /* responsive */
-    @media(max-width:600px){#site-logo{height:70px}}
+    :root {
+      --yellow: #f9b300;
+      --green: #009245;
+      --black: #1a1a1a;
+      --white: #ffffff;
+      --gray: #f5f5f5;
+    }
+    * {margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif;}
+
+    body {
+      line-height:1.6;
+      color:var(--black);
+      background: linear-gradient(135deg, #e8ffe8, #fff8e1, #e0f7fa);
+      background-attachment: fixed;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--black);
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav .logo-container {
+      display: flex;
+      align-items: center;
+    }
+    nav img {
+      height: 50px;
+      margin-right: 10px;
+    }
+    nav .brand {
+      color: var(--white);
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    nav .links {
+      display: flex;
+      gap: 15px;
+    }
+    nav .links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav .links a:hover {color: var(--yellow);}
+    
+    /* Mobile menu */
+    nav .menu-toggle {
+      display: none;
+      font-size: 24px;
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      nav .links {
+        display: none;
+        flex-direction: column;
+        background: var(--black);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 15px;
+      }
+      nav .links.show {
+        display: flex;
+      }
+      nav .menu-toggle {
+        display: block;
+      }
+    }
+
+    section {padding:50px 20px; max-width:1200px; margin:auto;}
+    h2 {color:var(--green); margin-bottom:20px; text-align:center;}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;}
+    .card {
+      background: var(--gray);
+      padding:20px;
+      border-radius:10px;
+      text-align:center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+
+    .pricing table {width:100%; border-collapse:collapse;}
+    .pricing th, .pricing td {border:1px solid #ccc; padding:12px; text-align:center;}
+    .pricing th {background:var(--yellow); color:var(--black);}
+
+    footer {
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+    }
+    iframe {width:100%; border:0; border-radius:10px;}
+
+    .call-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--green);
+      color: var(--white);
+      padding: 15px 20px;
+      border-radius: 50px;
+      font-size: 18px;
+      text-decoration: none;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      z-index: 2000;
+      transition:0.3s;
+    }
+    .call-button:hover {background: var(--yellow); color: var(--black);}
   </style>
 </head>
-<body>
-  <div id="loader"><div id="sun">🌞</div><h1 style="color:var(--green);margin-top:18px">Welcome</h1></div>
+<body id="top">
 
+  <!-- Navigation -->
   <nav>
     <div class="logo-container">
-      <a href="#top"><img id="site-logo" src="website_images/logo.jpg" alt="Sadguru Renewable Logo"></a>
-      <div class="brand">Sadguru Renewable</div>
+      <a href="#top">
+        <img src="logo.webp" alt="Sadguru Renewable Logo">
+      </a>
+      <span class="brand">Sadguru Renewable</span>
     </div>
-    <div class="links">
+    <div class="links" id="nav-links">
       <a href="#about">About</a>
       <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
       <a href="#projects">Projects</a>
-      <a href="#enquiry">Enquiry</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#ceo">Founder</a>
       <a href="#contact">Contact</a>
     </div>
+    <div class="menu-toggle" id="menu-toggle">☰</div>
   </nav>
 
-  <section id="about" data-aos="fade-up">
+  <!-- Sections -->
+  <section id="about">
     <h2>About Us</h2>
-    <p>Sadguru Renewable brings 8+ years of expertise in solar energy solutions across Chhattisgarh. We provide affordable, reliable, and sustainable energy systems for homes, businesses, and industries.</p>
+    <p>Sadguru Renewable brings 8+ years of expertise in solar energy solutions across Chhattisgarh. We provide affordable, reliable, and sustainable energy systems for homes, businesses, and industries. Our mission is to make Chhattisgarh a hub of green energy.</p>
   </section>
 
-  <section id="services" data-aos="fade-up">
+  <section id="services">
     <h2>Our Services</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;max-width:1000px;margin:0 auto">
-      <div style="background:var(--gray);padding:14px;border-radius:10px;text-align:center">Residential Rooftop Solar</div>
-      <div style="background:var(--gray);padding:14px;border-radius:10px;text-align:center">Commercial & Institutional</div>
-      <div style="background:var(--gray);padding:14px;border-radius:10px;text-align:center">Industrial Solar</div>
-      <div style="background:var(--gray);padding:14px;border-radius:10px;text-align:center">Solar Farms</div>
+    <div class="grid">
+      <div class="card">🏡 Residential Rooftop Solar</div>
+      <div class="card">🏥 Commercial & Institutional Solar</div>
+      <div class="card">🏭 Industrial Solar</div>
+      <div class="card">🌞 Solar Farms & Large-Scale Projects</div>
+      <div class="card">🔧 AMC & Maintenance</div>
     </div>
   </section>
 
-  <section id="projects" data-aos="fade-up">
+  <section id="pricing" class="pricing">
+    <h2>Pricing (DCR Systems)</h2>
+    <table>
+      <tr><th>Capacity</th><th>Amount (₹)</th><th>Subsidy (₹)</th><th>Final Cost (₹)</th></tr>
+      <tr><td>1 kW</td><td>65,000</td><td>45,000</td><td>20,000</td></tr>
+      <tr><td>2 kW</td><td>1,30,000</td><td>90,000</td><td>40,000</td></tr>
+      <tr><td>3 kW</td><td>1,95,000</td><td>1,08,000</td><td>87,000</td></tr>
+      <tr><td>5 kW</td><td>3,25,000</td><td>1,08,000</td><td>2,17,000</td></tr>
+    </table>
+  </section>
+
+  <section id="projects">
     <h2>Our Projects</h2>
-    <div class="project-grid">
-      <!-- Bhilai -->
-      <div class="project-card" data-aos="zoom-in" data-aos-delay="50">
-        <a href="website_images/bhilai1.jpg" data-lightbox="bhilai" data-title="Bhilai Project">
-          <img src="website_images/bhilai1.jpg" alt="Bhilai Project">
-        </a>
-        <h3>Bhilai</h3>
-        <p>Residential rooftop installation in Bhilai.</p>
-      </div>
-
-      <!-- Durg -->
-      <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
-        <a href="website_images/durg1.jpg" data-lightbox="durg" data-title="Durg Project">
-          <img src="website_images/durg1.jpg" alt="Durg Project">
-        </a>
-        <h3>Durg</h3>
-        <p>Commercial rooftop installation in Durg.</p>
-      </div>
-
-      <!-- Raipur -->
-      <div class="project-card" data-aos="zoom-in" data-aos-delay="150">
-        <a href="website_images/raipur1.jpg" data-lightbox="raipur" data-title="Raipur Project">
-          <img src="website_images/raipur1.jpg" alt="Raipur Project">
-        </a>
-        <h3>Raipur</h3>
-        <p>Educational institute solar system in Raipur.</p>
-      </div>
-
-      <!-- Dhamtari -->
-      <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
-        <a href="website_images/dhamtari1.jpg" data-lightbox="dhamtari" data-title="Dhamtari Project">
-          <img src="website_images/dhamtari1.jpg" alt="Dhamtari Project">
-        </a>
-        <h3>Dhamtari</h3>
-        <p>Rural solar development in Dhamtari.</p>
-        <a href="website_images/dhamtari2.jpg" data-lightbox="dhamtari" data-title="Dhamtari Project" style="display:none"></a>
-      </div>
-
-      <!-- Bemetara (multiple images) -->
-      <div class="project-card" data-aos="zoom-in" data-aos-delay="250">
-        <a href="website_images/bemetara1.jpg" data-lightbox="bemetara" data-title="Bemetara Project">
-          <img src="website_images/bemetara1.jpg" alt="Bemetara Project">
-        </a>
-        <h3>Bemetara</h3>
-        <p>Multiple installations across Bemetara.</p>
-        <a href="website_images/bemetara2.jpg" data-lightbox="bemetara" data-title="Bemetara Project" style="display:none"></a>
-        <a href="website_images/bemetara3.jpg" data-lightbox="bemetara" data-title="Bemetara Project" style="display:none"></a>
-        <a href="website_images/bemetara4.jpg" data-lightbox="bemetara" data-title="Bemetara Project" style="display:none"></a>
-        <a href="website_images/bemetara5.jpg" data-lightbox="bemetara" data-title="Bemetara Project" style="display:none"></a>
-      </div>
-
-      <!-- Rajim -->
-      <div class="project-card" data-aos="zoom-in" data-aos-delay="300">
-        <a href="website_images/rajim1.jpg" data-lightbox="rajim" data-title="Rajim Project">
-          <img src="website_images/rajim1.jpg" alt="Rajim Project">
-        </a>
-        <h3>Rajim</h3>
-        <p>Community solar in Rajim.</p>
-        <a href="website_images/rajim2.jpg" data-lightbox="rajim" data-title="Rajim Project" style="display:none"></a>
-      </div>
+    <div class="grid">
+      <div class="card">✅ Bhilai</div>
+      <div class="card">✅ Raipur</div>
+      <div class="card">✅ Durg</div>
+      <div class="card">✅ Dhamtari</div>
+      <div class="card">✅ Rajim</div>
+      <div class="card">✅ Bemetara</div>
     </div>
   </section>
 
-  <section id="enquiry" data-aos="fade-up">
-    <h2>Enquiry Form</h2>
-    <form action="https://formspree.io/f/xrbyzgdk" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <input type="text" name="address" placeholder="Your Address" required>
-      <select name="type" required>
-        <option value="">Select Type</option>
-        <option value="residential">Residential</option>
-        <option value="commercial">Commercial</option>
-      </select>
-      <textarea name="message" placeholder="Your Message" required></textarea>
-      <input type="hidden" name="_subject" value="New enquiry from website">
-      <button type="submit">Send Enquiry</button>
-    </form>
+  <section id="benefits">
+    <h2>Why Choose Solar?</h2>
+    <div class="grid">
+      <div class="card">💰 Save up to 70% on electricity bills</div>
+      <div class="card">🔋 ROI in 4–6 years</div>
+      <div class="card">🌱 Eco-friendly</div>
+      <div class="card">🛠 Low maintenance</div>
+      <div class="card">🏡 Increase property value</div>
+      <div class="card">🤝 25 years panel warranty</div>
+    </div>
   </section>
 
-  <section id="contact" data-aos="fade-up">
+  <section id="ceo">
+    <h2>Founder & CEO</h2>
+    <p><strong>Abhilash Joshi</strong>, Founder & CEO of Sadguru Renewable, envisions making renewable energy accessible and affordable for every household and business in Chhattisgarh.</p>
+  </section>
+
+  <section id="contact">
     <h2>Contact Us</h2>
     <p>📞 <a href="tel:+918109414528">+91 81094 14528</a> | <a href="tel:+918236078233">+91 82360 78233</a></p>
     <p>📧 <a href="mailto:entp.saguru21@gmail.com">entp.saguru21@gmail.com</a></p>
+    <p>🏢 Office Address: 3rd Floor, Office No. 24, SADGURU ENTERPRISES, Magneto Mall, Jivan Vihar, Raipur</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.8218492648916!2d81.68188429150008!3d21.2389119057292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a28dd4c8a4bb8d1%3A0x272bf48aa9f4d92a!2sSADGURU%20ENTERPRISES!5e0!3m2!1sen!2sin!4v1758435968347!5m2!1sen!2sin" width="600" height="450" allowfullscreen="" loading="lazy"></iframe>
   </section>
 
-  <footer data-aos="fade-up">
+  <footer>
     <p>© 2025 Sadguru Renewable | All Rights Reserved</p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+  <!-- Floating Call Button -->
+  <a href="tel:+918109414528" class="call-button">📞 Call Now</a>
+
   <script>
-    AOS.init({duration:800,once:true});
-    window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').style.display='none',1400)});
+    // Toggle mobile menu
+    const toggle = document.getElementById("menu-toggle");
+    const links = document.getElementById("nav-links");
+
+    toggle.addEventListener("click", () => {
+      links.classList.toggle("show");
+    });
   </script>
+
 </body>
 </html>
